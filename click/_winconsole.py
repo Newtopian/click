@@ -17,7 +17,13 @@ import ctypes
 import msvcrt
 from click._compat import _NonClosingTextIOWrapper, text_type, PY2
 from ctypes import byref, POINTER, c_int, c_char, c_char_p, \
-     c_void_p, py_object, c_ssize_t, c_ulong, windll, WINFUNCTYPE
+     c_void_p, py_object, c_ulong, windll, WINFUNCTYPE
+
+try:
+    from ctypes import c_ssize_t
+except ImportError:
+    from ctypes import c_longlong as c_ssize_t
+
 try:
     from ctypes import pythonapi
     PyObject_GetBuffer = pythonapi.PyObject_GetBuffer
